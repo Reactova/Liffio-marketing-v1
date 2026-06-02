@@ -18,7 +18,7 @@ import { metaCopy } from "@/config/meta-copy";
 export const metadata: Metadata = {
   title: "Pricing — Liffio",
   description:
-    "Simple, transparent pricing for Instagram DM automation. Free, Starter, Pro, Business, and Agency plans. No hidden fees — scale as you grow.",
+    "Simple, transparent pricing for Instagram DM automation. Free, Starter, Business, and Agency plans. No hidden fees — scale as you grow.",
 };
 
 function CellValue({ value }: { value: boolean | string }) {
@@ -152,7 +152,7 @@ export default async function PricingPage() {
                     <p className="text-sm text-gray-500 mt-1">{category.description}</p>
                   </div>
                   <div className="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm">
-                    <table className="w-full min-w-[800px] text-left">
+                    <table className="w-full min-w-[720px] text-left">
                       <thead>
                         <tr className="bg-gray-50 border-b border-gray-100">
                           <th className="px-5 py-3 text-xs font-bold uppercase tracking-wider text-gray-500 w-[40%]">

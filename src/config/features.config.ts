@@ -168,5 +168,5 @@ export const PLATFORM_EXTRAS = [
   { title: "Bio link pages", desc: "Branded pages with click tracking at bio.liffio.com." },
   { title: "Smart short links", desc: "Track every link delivered in DMs with UTM attribution." },
   { title: "Conversion analytics", desc: "Comment → DM → click → sale in one dashboard." },
-  { title: "Team workspaces", desc: "Collaborate with VAs and managers on Pro and above." },
+  { title: "Team workspaces", desc: "Collaborate with VAs and managers on Starter and above." },
 ] as const;

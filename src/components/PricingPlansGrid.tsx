@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AppLink from "@/components/AppLink";
+import { PlanPriceBlock } from "@/components/pricing/PlanPriceBlock";
 import { pricingPerks, type PricingPlan } from "@/config/pricing.config";
 import { getPricingRegionLabel, type PricingRegion } from "@/lib/pricing-region";
 import { siteConfig } from "@/config/site.config";
@@ -24,9 +25,6 @@ function XIcon() {
   );
 }
 
-function isZeroPrice(price: string): boolean {
-  return price === "$0" || price === "₹0";
-}
 
 type PricingPlansGridProps = {
   compact?: boolean;
@@ -71,11 +69,8 @@ export default function PricingPlansGrid({ compact = false, plans, region }: Pri
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 max-w-7xl">
+      <div className="grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 max-w-7xl">
         {plans.map((plan) => {
-          const price = annual ? plan.annual : plan.monthly;
-          const showPerMonth = !isZeroPrice(plan.monthly);
-
           return (
             <div
               key={plan.name}
@@ -105,32 +100,7 @@ export default function PricingPlansGrid({ compact = false, plans, region }: Pri
                 <p className={`text-sm mb-6 min-h-[2.5rem] ${plan.highlight ? "text-white/65" : "text-gray-400"}`}>
                   {plan.description}
                 </p>
-                <div className="flex items-end gap-1">
-                  <span
-                    className={`font-extrabold tracking-tight leading-none ${plan.highlight ? "text-white" : "text-[#0a0a0a]"}`}
-                    style={{
-                      fontSize: isZeroPrice(price) ? "2.5rem" : "2.25rem",
-                      fontFamily: "var(--font-outfit,sans-serif)",
-                    }}
-                  >
-                    {price}
-                  </span>
-                  {showPerMonth && (
-                    <span className={`text-sm pb-1.5 ${plan.highlight ? "text-white/60" : "text-gray-400"}`}>
-                      /mo
-                      {annual && !isZeroPrice(plan.monthly) && (
-                        <span className={`block text-[10px] font-bold ${plan.highlight ? "text-white/50" : "text-gray-300"}`}>
-                          billed annually
-                        </span>
-                      )}
-                    </span>
-                  )}
-                </div>
-                {plan.priceNote && !annual && (
-                  <p className={`mt-2 text-xs font-semibold ${plan.highlight ? "text-white/75" : "text-[#7c5af3]"}`}>
-                    {plan.priceNote}
-                  </p>
-                )}
+                <PlanPriceBlock plan={plan} annual={annual} highlight={plan.highlight} />
               </div>
 
               <ul className="space-y-2.5 flex-1 mb-8">

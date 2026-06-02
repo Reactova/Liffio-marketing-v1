@@ -36,7 +36,7 @@ Reactova uses a hybrid commission model that rewards affiliates across the first
 Commission applies per workspace independently. If a referred user creates multiple workspaces within the 90-day attribution window, each workspace starts its own 3-month commission cycle. This means affiliates benefit from referring power users who manage multiple accounts or agencies who onboard multiple clients.
 
 2.3 Eligible Plans
-Commissions are earned on Starter, Pro, Business, and Agency plan subscriptions. Free plan signups do not generate commission. Creator Program access does not generate commission as it involves no payment.
+Commissions are earned on Starter, Business, and Agency plan subscriptions. Free plan signups do not generate commission. Creator Program access does not generate commission as it involves no payment.
 
 3. Attribution Rules
 Attribution determines which affiliate receives commission for a referred customer.

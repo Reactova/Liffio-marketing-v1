@@ -194,7 +194,7 @@ export default function SignupPage() {
                     Get started for free
                   </h2>
                   <p className="text-sm text-gray-400">
-                    1,000 automated DMs/month free — upgrade anytime.
+                    Unlimited automated DMs on every plan — upgrade anytime.
                   </p>
                 </div>
 

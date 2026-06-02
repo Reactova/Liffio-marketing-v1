@@ -68,13 +68,13 @@ export const homeFaqCategories: FaqCategory[] = [
         id: "starter-free",
         question: "Is the Free plan really free?",
         answer:
-          "Yes. Free is $0/month (₹0 in India) with no credit card required. You get 1,000 automated DMs per month, comment keyword triggers, public auto-replies, a bio link page, and basic analytics.",
+          "Yes. Free is $0/month (₹0 in India) with no credit card required. Every plan includes unlimited Instagram accounts and unlimited automated DMs, plus comment keyword triggers, public auto-replies, a bio link page, and basic analytics on Free.",
       },
       {
         id: "plans-offered",
         question: "What plans does Liffio offer?",
         answer:
-          "Five tiers: Free, Starter, Pro, Business, and Agency. Global pricing is in USD ($0–$299/mo); India pricing is in INR (₹0–₹9,999/mo). Prices are shown automatically based on your location.",
+          "Four tiers: Free, Starter, Business, and Agency. Global pricing is in USD ($0–$299/mo); India pricing is in INR (₹0–₹9,999/mo). All plans include unlimited Instagram accounts and unlimited automated DMs.",
       },
       {
         id: "billing-cycle",
@@ -84,9 +84,9 @@ export const homeFaqCategories: FaqCategory[] = [
       },
       {
         id: "dm-limit",
-        question: "What happens when I reach my DM limit?",
+        question: "Are automated DMs unlimited?",
         answer:
-          "Automation pauses until your next billing cycle. You receive email alerts at 80% and 100% of your monthly limit.",
+          "Yes. Every plan includes unlimited automated DMs — there is no monthly cap on how many messages you can send.",
       },
       {
         id: "cancel",
@@ -109,7 +109,7 @@ export const homeFaqCategories: FaqCategory[] = [
         id: "multiple-accounts",
         question: "Can I manage multiple Instagram accounts?",
         answer:
-          "Yes. Pro includes up to 5 accounts, Business up to 10, and Agency supports unlimited accounts with white-label workspaces for clients.",
+          "Yes. All plans include unlimited Instagram accounts. Agency adds white-label workspaces for managing client brands at scale.",
       },
     ],
   },

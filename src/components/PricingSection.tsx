@@ -3,6 +3,7 @@
 import { useState } from "react";
 import AppLink from "@/components/AppLink";
 import PricingPlansGrid from "@/components/PricingPlansGrid";
+import { PlanPriceBlock } from "@/components/pricing/PlanPriceBlock";
 import { TechBadge } from "@/components/TechBadge";
 import type { PricingPlan } from "@/config/pricing.config";
 import type { PricingRegion } from "@/lib/pricing-region";
@@ -23,10 +24,8 @@ function CheckIcon({ light }: { light?: boolean }) {
 }
 
 function MobilePlanCard({ plan, annual }: { plan: PricingPlan; annual: boolean }) {
-  const price = annual ? plan.annual : plan.monthly;
   const topFeatures = plan.features.filter((f) => f.included).slice(0, 4);
   const light = plan.highlight;
-  const showPerMonth = price !== "$0" && price !== "₹0";
 
   return (
     <article
@@ -52,23 +51,7 @@ function MobilePlanCard({ plan, annual }: { plan: PricingPlan; annual: boolean }
           <h3 className={`text-lg font-bold ${light ? "text-white" : "text-[#0a0a0a]"}`}>{plan.name}</h3>
         </div>
         <div className="text-right">
-          <p
-            className={`font-extrabold leading-none tabular-nums ${light ? "text-white" : "text-[#0a0a0a]"}`}
-            style={{
-              fontFamily: "var(--font-outfit,sans-serif)",
-              fontSize: showPerMonth ? "1.75rem" : "1.5rem",
-            }}
-          >
-            {price}
-          </p>
-          {showPerMonth ? (
-            <p className={`text-[11px] ${light ? "text-white/60" : "text-gray-400"}`}>/mo</p>
-          ) : null}
-          {plan.priceNote && !annual ? (
-            <p className={`mt-1 text-[10px] font-semibold ${light ? "text-white/70" : "text-[#7c5af3]"}`}>
-              {plan.priceNote}
-            </p>
-          ) : null}
+          <PlanPriceBlock plan={plan} annual={annual} highlight={light} compact align="right" />
         </div>
       </div>
 

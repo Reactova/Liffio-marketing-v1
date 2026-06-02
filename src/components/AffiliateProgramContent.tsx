@@ -69,8 +69,8 @@ const ATTRIBUTION_RULES = [
 ];
 
 const ELIGIBLE_PLANS = [
-  { name: "Starter", earns: false, note: "Free — no commission" },
-  { name: "Pro", earns: true },
+  { name: "Free", earns: false, note: "No commission" },
+  { name: "Starter", earns: true },
   { name: "Business", earns: true },
   { name: "Agency", earns: true },
   { name: "Creators Program", earns: false, note: "No payment" },

@@ -8,8 +8,9 @@ export type PricingPlan = {
   name: string;
   monthly: string;
   annual: string;
-  /** Shown below the price (e.g. India Starter intro offer). */
-  priceNote?: string | null;
+  /** Introductory price shown prominently on monthly billing (e.g. ₹49). */
+  introPrice?: string | null;
+  introPriceLabel?: string | null;
   description: string;
   badge: string | null;
   highlight: boolean;
@@ -39,9 +40,13 @@ function inrAnnual(monthlyAmount: number): string {
   return `₹${Math.round(monthlyAmount * ANNUAL_DISCOUNT).toLocaleString("en-IN")}`;
 }
 
+const unlimitedCore: PlanFeature[] = [
+  { text: "Unlimited Instagram accounts", included: true },
+  { text: "Unlimited automated DMs", included: true },
+];
+
 const freeFeatures: PlanFeature[] = [
-  { text: "1 Instagram account", included: true },
-  { text: "1,000 automated DMs / month", included: true },
+  ...unlimitedCore,
   { text: "Comment keyword triggers", included: true },
   { text: "Public comment auto-replies", included: true },
   { text: "3 DM message templates", included: true },
@@ -53,21 +58,7 @@ const freeFeatures: PlanFeature[] = [
 ];
 
 const starterFeatures: PlanFeature[] = [
-  { text: "2 Instagram accounts", included: true },
-  { text: "5,000 automated DMs / month", included: true },
-  { text: "Comment keyword triggers", included: true },
-  { text: "Public comment auto-replies", included: true },
-  { text: "10 DM message templates", included: true },
-  { text: "Bio link page (bio.liffio.com)", included: true },
-  { text: "Basic analytics", included: true },
-  { text: "Story, Live & multi-step flows", included: false },
-  { text: "Short links & lead capture", included: false },
-  { text: "External API access", included: false },
-];
-
-const proFeatures: PlanFeature[] = [
-  { text: "5 Instagram accounts", included: true },
-  { text: "50,000 automated DMs / month", included: true },
+  ...unlimitedCore,
   { text: "All 8 automation trigger types", included: true },
   { text: "Unlimited templates & multi-step flows", included: true },
   { text: "Story, Live & welcome DM automations", included: true },
@@ -76,12 +67,12 @@ const proFeatures: PlanFeature[] = [
   { text: "Lead capture from DMs & link clicks", included: true },
   { text: "Post scheduler (Instagram feed)", included: true },
   { text: "Priority email support", included: true },
+  { text: "External API access", included: false },
 ];
 
 const businessFeatures: PlanFeature[] = [
-  { text: "10 Instagram accounts", included: true },
-  { text: "Unlimited automated DMs", included: true },
-  { text: "Everything in Pro", included: true },
+  ...unlimitedCore,
+  { text: "Everything in Starter", included: true },
   { text: "Full conversion analytics (comment → sale)", included: true },
   { text: "Instagram account-level insights", included: true },
   { text: "External API keys (plan-gated)", included: true },
@@ -92,8 +83,7 @@ const businessFeatures: PlanFeature[] = [
 ];
 
 const agencyFeatures: PlanFeature[] = [
-  { text: "Unlimited Instagram accounts", included: true },
-  { text: "Custom DM volume limits", included: true },
+  ...unlimitedCore,
   { text: "Agency white-label workspaces", included: true },
   { text: "Client sub-workspaces (CLIENT role)", included: true },
   { text: "Dedicated account manager", included: true },
@@ -103,6 +93,8 @@ const agencyFeatures: PlanFeature[] = [
   { text: "SLA-backed priority support", included: true },
   { text: "Volume & multi-workspace pricing", included: true },
 ];
+
+const planSignupUrl = (plan: string) => `${signup}?plan=${plan}&source=liffio`;
 
 const globalPricingPlans: PricingPlan[] = [
   {
@@ -115,31 +107,19 @@ const globalPricingPlans: PricingPlan[] = [
     popular: false,
     features: freeFeatures,
     cta: "Start for Free",
-    href: signup,
+    href: planSignupUrl("STARTER"),
   },
   {
     name: "Starter",
     monthly: usdMonthly(9),
     annual: usdAnnual(9),
-    description: "More accounts and DMs for growing creators ready to scale engagement.",
-    badge: null,
-    highlight: false,
-    popular: false,
-    features: starterFeatures,
-    cta: "Get Starter",
-    href: signup,
-  },
-  {
-    name: "Pro",
-    monthly: usdMonthly(29),
-    annual: usdAnnual(29),
     description: "Everything creators need to convert comments into sales on autopilot.",
     badge: "Most Popular",
     highlight: true,
     popular: true,
-    features: proFeatures,
-    cta: "Get Pro",
-    href: signup,
+    features: starterFeatures,
+    cta: "Get Starter",
+    href: planSignupUrl("STARTER"),
   },
   {
     name: "Business",
@@ -151,7 +131,7 @@ const globalPricingPlans: PricingPlan[] = [
     popular: false,
     features: businessFeatures,
     cta: "Get Business",
-    href: signup,
+    href: planSignupUrl("BUSINESS"),
   },
   {
     name: "Agency",
@@ -163,7 +143,7 @@ const globalPricingPlans: PricingPlan[] = [
     popular: false,
     features: agencyFeatures,
     cta: "Get Agency",
-    href: signup,
+    href: planSignupUrl("AGENCY"),
   },
 ];
 
@@ -178,32 +158,21 @@ const indiaPricingPlans: PricingPlan[] = [
     popular: false,
     features: freeFeatures,
     cta: "Start for Free",
-    href: signup,
+    href: planSignupUrl("STARTER"),
   },
   {
     name: "Starter",
     monthly: inrMonthly(499),
     annual: inrAnnual(499),
-    priceNote: "₹49 first month",
-    description: "More accounts and DMs for growing creators ready to scale engagement.",
-    badge: null,
-    highlight: false,
-    popular: false,
-    features: starterFeatures,
-    cta: "Get Starter",
-    href: signup,
-  },
-  {
-    name: "Pro",
-    monthly: inrMonthly(999),
-    annual: inrAnnual(999),
+    introPrice: "₹49",
+    introPriceLabel: "first month",
     description: "Everything creators need to convert comments into sales on autopilot.",
     badge: "Most Popular",
     highlight: true,
     popular: true,
-    features: proFeatures,
-    cta: "Get Pro",
-    href: signup,
+    features: starterFeatures,
+    cta: "Get Starter",
+    href: planSignupUrl("STARTER"),
   },
   {
     name: "Business",
@@ -215,7 +184,7 @@ const indiaPricingPlans: PricingPlan[] = [
     popular: false,
     features: businessFeatures,
     cta: "Get Business",
-    href: signup,
+    href: planSignupUrl("BUSINESS"),
   },
   {
     name: "Agency",
@@ -227,7 +196,7 @@ const indiaPricingPlans: PricingPlan[] = [
     popular: false,
     features: agencyFeatures,
     cta: "Get Agency",
-    href: signup,
+    href: planSignupUrl("AGENCY"),
   },
 ];
 
@@ -251,43 +220,43 @@ export const featureCategories = [
     name: "Comment-to-DM Automation",
     description: metaCopy.pricingCategoryApis,
     features: [
-      { name: "Keyword comment triggers", free: true, starter: true, pro: true, business: true, agency: true },
-      { name: "Public comment auto-replies", free: true, starter: true, pro: true, business: true, agency: true },
-      { name: "Story mention & reaction triggers", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Live stream comment-to-DM", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Welcome DM for new followers", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Multi-step DM flows with logic", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Follow-up DM sequences", free: false, starter: false, pro: false, business: true, agency: true },
+      { name: "Keyword comment triggers", free: true, starter: true, business: true, agency: true },
+      { name: "Public comment auto-replies", free: true, starter: true, business: true, agency: true },
+      { name: "Story mention & reaction triggers", free: false, starter: true, business: true, agency: true },
+      { name: "Live stream comment-to-DM", free: false, starter: true, business: true, agency: true },
+      { name: "Welcome DM for new followers", free: false, starter: true, business: true, agency: true },
+      { name: "Multi-step DM flows with logic", free: false, starter: true, business: true, agency: true },
+      { name: "Follow-up DM sequences", free: false, starter: false, business: true, agency: true },
     ],
   },
   {
     name: "Growth Toolkit",
     description: "Bio links, short links, scheduling, and analytics — all in one workspace.",
     features: [
-      { name: "Bio link pages (bio.liffio.com)", free: true, starter: true, pro: true, business: true, agency: true },
-      { name: "Branded short links (go.liffio.com)", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Click & referrer tracking", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Lead capture from DMs & clicks", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Post scheduler (Instagram feed)", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Conversion analytics (comment → sale)", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "Instagram account insights", free: false, starter: false, pro: false, business: true, agency: true },
+      { name: "Bio link pages (bio.liffio.com)", free: true, starter: true, business: true, agency: true },
+      { name: "Branded short links (go.liffio.com)", free: false, starter: true, business: true, agency: true },
+      { name: "Click & referrer tracking", free: false, starter: true, business: true, agency: true },
+      { name: "Lead capture from DMs & clicks", free: false, starter: true, business: true, agency: true },
+      { name: "Post scheduler (Instagram feed)", free: false, starter: true, business: true, agency: true },
+      { name: "Conversion analytics (comment → sale)", free: false, starter: true, business: true, agency: true },
+      { name: "Instagram account insights", free: false, starter: false, business: true, agency: true },
     ],
   },
   {
     name: "Team, API & Agency",
     description: "Collaborate with your team, integrate via API, or manage client workspaces at scale.",
     features: [
-      { name: "Team members", free: "1", starter: "2", pro: "3", business: "5", agency: "Unlimited" },
-      { name: "Role-based access (RBAC)", free: false, starter: false, pro: true, business: true, agency: true },
-      { name: "External API keys", free: false, starter: false, pro: false, business: true, agency: true },
-      { name: "Agency white-label workspaces", free: false, starter: false, pro: false, business: false, agency: true },
-      { name: "Client sub-workspaces", free: false, starter: false, pro: false, business: false, agency: true },
-      { name: "Affiliate program (50% commission)", free: false, starter: true, pro: true, business: true, agency: true },
+      { name: "Team members", free: "1", starter: "3", business: "5", agency: "Unlimited" },
+      { name: "Role-based access (RBAC)", free: false, starter: true, business: true, agency: true },
+      { name: "External API keys", free: false, starter: false, business: true, agency: true },
+      { name: "Agency white-label workspaces", free: false, starter: false, business: false, agency: true },
+      { name: "Client sub-workspaces", free: false, starter: false, business: false, agency: true },
+      { name: "Affiliate program (50% commission)", free: false, starter: true, business: true, agency: true },
     ],
   },
 ];
 
-export const comparisonPlanNames = ["Free", "Starter", "Pro", "Business", "Agency"] as const;
+export const comparisonPlanNames = ["Free", "Starter", "Business", "Agency"] as const;
 
 type PlanColumn = (typeof comparisonPlanNames)[number];
 
@@ -298,14 +267,14 @@ export function getPricingFaqs(region: PricingRegion) {
     {
       q: "Is the Free plan really free?",
       a: isIndia
-        ? "Yes. Free is ₹0/month with no credit card required. You get 1,000 automated DMs per month, comment keyword triggers, public auto-replies, a bio link page, and basic analytics."
-        : "Yes. Free is $0/month with no credit card required. You get 1,000 automated DMs per month, comment keyword triggers, public auto-replies, a bio link page, and basic analytics.",
+        ? "Yes. Free is ₹0/month with no credit card required. You get unlimited Instagram accounts, unlimited automated DMs, comment keyword triggers, public auto-replies, a bio link page, and basic analytics."
+        : "Yes. Free is $0/month with no credit card required. You get unlimited Instagram accounts, unlimited automated DMs, comment keyword triggers, public auto-replies, a bio link page, and basic analytics.",
     },
     {
       q: "What plans does Liffio offer?",
       a: isIndia
-        ? "Liffio has five tiers: Free (₹0), Starter (₹499/mo, ₹49 first month), Pro (₹999/mo), Business (₹2,499/mo), and Agency (₹9,999/mo). Each tier unlocks more accounts, DMs, automations, and growth tools."
-        : "Liffio has five tiers: Free ($0), Starter ($9/mo), Pro ($29/mo), Business ($79/mo), and Agency ($299/mo). Each tier unlocks more accounts, DMs, automations, and growth tools.",
+        ? "Liffio has four tiers: Free (₹0), Starter (₹499/mo, ₹49 first month), Business (₹2,499/mo), and Agency (₹9,999/mo). Every plan includes unlimited Instagram accounts and unlimited automated DMs."
+        : "Liffio has four tiers: Free ($0), Starter ($9/mo), Business ($79/mo), and Agency ($299/mo). Every plan includes unlimited Instagram accounts and unlimited automated DMs.",
     },
     {
       q: "Can I pay monthly, quarterly, or annually?",
@@ -316,16 +285,12 @@ export function getPricingFaqs(region: PricingRegion) {
       a: metaCopy.pricingFaqSafe,
     },
     {
-      q: "What counts as one DM?",
-      a: "Each automated message sent to a unique user counts as one DM. Replies within the same conversation thread do not count as additional DMs.",
-    },
-    {
       q: "Can I upgrade or downgrade anytime?",
       a: "Yes. You can change plans at any time from your workspace billing settings. Upgrades take effect immediately; downgrades apply at the end of your current billing period.",
     },
     {
       q: "What's included in the Agency plan?",
-      a: "Agency includes white-label workspaces, client sub-workspaces with restricted CLIENT roles, unlimited accounts, custom DM limits, dedicated account management, API access, and volume pricing tailored to your agency.",
+      a: "Agency includes white-label workspaces, client sub-workspaces with restricted CLIENT roles, dedicated account management, full API access, and volume pricing tailored to your agency.",
     },
     {
       q: "Do you offer a Creators Program?",
