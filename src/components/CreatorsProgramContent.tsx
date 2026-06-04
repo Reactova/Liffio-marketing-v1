@@ -4,21 +4,7 @@ import { useEffect, useState } from "react";
 import CreatorsForm from "@/components/CreatorsForm";
 import { TechBadge } from "@/components/TechBadge";
 
-const BENEFITS = [
-  {
-    icon: "💎",
-    title: "Free Business Plan",
-    description:
-      "Full, unrestricted access to our $79/mo Business plan — at zero cost. Every feature, every workflow, every integration unlocked from day one.",
-    tag: "Worth $79/month",
-  },
-  {
-    icon: "♾️",
-    title: "Unlimited Automations",
-    description:
-      "Create unlimited comment-to-DM workflows across all your posts. No caps, no throttling, no hidden limits on campaigns or keywords.",
-    tag: "Unlimited workflows",
-  },
+const STATIC_BENEFITS = [
   {
     icon: "📊",
     title: "Advanced Analytics",
@@ -48,6 +34,25 @@ const BENEFITS = [
     tag: "Direct team access",
   },
 ];
+
+function getBenefits(businessPlanValue: string) {
+  return [
+    {
+      icon: "💎",
+      title: "Free Business Plan",
+      description: `Full, unrestricted access to our ${businessPlanValue} Business plan — at zero cost. Every feature, every workflow, every integration unlocked from day one.`,
+      tag: `Worth ${businessPlanValue}`,
+    },
+    {
+      icon: "♾️",
+      title: "Unlimited Automations",
+      description:
+        "Create unlimited comment-to-DM workflows across all your posts. No caps, no throttling, no hidden limits on campaigns or keywords.",
+      tag: "Unlimited workflows",
+    },
+    ...STATIC_BENEFITS,
+  ];
+}
 
 const QUALIFICATIONS = [
   "5,000 – 100,000 Instagram followers",
@@ -100,7 +105,8 @@ function Check({ green }: { green?: boolean }) {
   );
 }
 
-export default function CreatorsProgramContent() {
+export default function CreatorsProgramContent({ businessPlanValue }: { businessPlanValue: string }) {
+  const benefits = getBenefits(businessPlanValue);
   const [spotsRemaining, setSpotsRemaining] = useState<number | null>(null);
   const [spotsCap, setSpotsCap] = useState(50);
   const [showFab, setShowFab] = useState(true);
@@ -175,7 +181,7 @@ export default function CreatorsProgramContent() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-500">
-            {["Free forever for approved creators", "Reviewed within 48–72 hours", "No credit card, ever"].map(t => (
+            {["Free forever for approved creators", "Reviewed within 48–72 hours", "No credit card required"].map(t => (
               <span key={t} className="flex items-center gap-1.5">
                 <svg className="w-3.5 h-3.5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -197,7 +203,7 @@ export default function CreatorsProgramContent() {
                 label: `Spots remaining out of ${spotsCap}`,
                 color: "#7c5af3",
               },
-              { num: "$79/mo", label: "Value — completely free", color: "#a855f7" },
+              { num: businessPlanValue, label: "Value — completely free", color: "#a855f7" },
               { num: "48h", label: "Review turnaround", color: "#4259f0" },
               { num: "10+", label: "Countries represented", color: "#6366f1" },
             ].map((s, i) => (
@@ -253,7 +259,7 @@ export default function CreatorsProgramContent() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {BENEFITS.map(b => (
+            {benefits.map(b => (
               <div key={b.title}
                 className="group rounded-2xl bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                 style={{ border: "1px solid rgba(124,90,243,0.1)", boxShadow: "0 2px 12px rgba(124,90,243,0.05)" }}>
@@ -336,7 +342,7 @@ export default function CreatorsProgramContent() {
               Apply to the Creators Program
             </h2>
             <p className="text-gray-500 text-sm">
-              Takes under 2 minutes · Reviewed within 48 hours · No credit card needed
+              Takes under 2 minutes · Reviewed within 48 hours · No credit card required
             </p>
             {spotsRemaining !== null && (
               <TechBadge

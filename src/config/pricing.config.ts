@@ -210,10 +210,31 @@ export function getPricingPlans(region: PricingRegion): PricingPlan[] {
 export const pricingPerks = [
   { icon: "🔒", label: "No contracts" },
   { icon: "↩️", label: "Cancel anytime" },
-  { icon: "💳", label: "No credit card for Free" },
+  { icon: "💳", label: "No credit card required" },
   { icon: "⚡", label: "Instant setup" },
   { icon: "🌍", label: "Stripe + Razorpay billing" },
 ];
+
+export function getFreePlanFaqAnswer(region: PricingRegion): string {
+  const price = region === "india" ? "₹0/month" : "$0/month";
+  return `Yes. The Free plan is ${price}. No credit card required. You get unlimited Instagram accounts, unlimited automated DMs, comment keyword triggers, public auto-replies, a bio link page, and basic analytics.`;
+}
+
+export function getPlansOfferedFaqAnswer(region: PricingRegion): string {
+  if (region === "india") {
+    return "Four tiers: Free (₹0), Starter (₹499/mo — ₹49 first month, then ₹499/mo or ₹399/mo billed annually), Business (₹2,499/mo), and Agency (₹9,999/mo). Every plan includes unlimited Instagram accounts and unlimited automated DMs.";
+  }
+  return "Four tiers: Free ($0), Starter ($9/mo), Business ($79/mo), and Agency ($299/mo). Annual billing saves 20%. Every plan includes unlimited Instagram accounts and unlimited automated DMs.";
+}
+
+export function getBusinessPlanValueLabel(region: PricingRegion): string {
+  return region === "india" ? "₹2,499/mo" : "$79/mo";
+}
+
+export function getCreatorsProgramFaqAnswer(region: PricingRegion): string {
+  const value = getBusinessPlanValueLabel(region);
+  return `Yes. Qualified Instagram creators (5K–100K followers) can apply for our Creators Program and receive the full Business plan (${value} value) at no cost in exchange for active platform usage. No credit card required.`;
+}
 
 export const featureCategories = [
   {
@@ -261,20 +282,14 @@ export const comparisonPlanNames = ["Free", "Starter", "Business", "Agency"] as 
 type PlanColumn = (typeof comparisonPlanNames)[number];
 
 export function getPricingFaqs(region: PricingRegion) {
-  const isIndia = region === "india";
-
   return [
     {
       q: "Is the Free plan really free?",
-      a: isIndia
-        ? "Yes. Free is ₹0/month with no credit card required. You get unlimited Instagram accounts, unlimited automated DMs, comment keyword triggers, public auto-replies, a bio link page, and basic analytics."
-        : "Yes. Free is $0/month with no credit card required. You get unlimited Instagram accounts, unlimited automated DMs, comment keyword triggers, public auto-replies, a bio link page, and basic analytics.",
+      a: getFreePlanFaqAnswer(region),
     },
     {
       q: "What plans does Liffio offer?",
-      a: isIndia
-        ? "Liffio has four tiers: Free (₹0), Starter (₹499/mo, ₹49 first month), Business (₹2,499/mo), and Agency (₹9,999/mo). Every plan includes unlimited Instagram accounts and unlimited automated DMs."
-        : "Liffio has four tiers: Free ($0), Starter ($9/mo), Business ($79/mo), and Agency ($299/mo). Every plan includes unlimited Instagram accounts and unlimited automated DMs.",
+      a: getPlansOfferedFaqAnswer(region),
     },
     {
       q: "Can I pay monthly, quarterly, or annually?",
@@ -294,9 +309,7 @@ export function getPricingFaqs(region: PricingRegion) {
     },
     {
       q: "Do you offer a Creators Program?",
-      a: isIndia
-        ? "Yes. Qualified Instagram creators (5K–100K followers) can apply for our Creators Program and receive the full Business plan (₹2,499/mo value) at no cost in exchange for active platform usage."
-        : "Yes. Qualified Instagram creators (5K–100K followers) can apply for our Creators Program and receive the full Business plan ($79/mo value) at no cost in exchange for active platform usage.",
+      a: getCreatorsProgramFaqAnswer(region),
     },
   ];
 }

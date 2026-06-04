@@ -5,10 +5,11 @@ import Footer from "@/components/Footer";
 import PricingPlansGrid, { PricingBottomCta } from "@/components/PricingPlansGrid";
 import PricingComparisonSection from "@/components/pricing/PricingComparisonSection";
 import { CountryFlag } from "@/components/pricing/CountryFlag";
+import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import {
-  getPricingFaqs,
   getPricingPlans,
 } from "@/config/pricing.config";
+import { getFaqCategories } from "@/config/faq.config";
 import { getPricingLocationLabel } from "@/lib/pricing-region";
 import { getPricingContext } from "@/lib/pricing-region.server";
 import { siteConfig } from "@/config/site.config";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default async function PricingPage() {
   const { region, countryCode } = await getPricingContext();
   const plans = getPricingPlans(region);
-  const pricingFaqs = getPricingFaqs(region);
+  const faqCategories = getFaqCategories(region);
   const locationLabel = getPricingLocationLabel(region, countryCode);
 
   return (
@@ -133,28 +134,11 @@ export default async function PricingPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-20 bg-gray-50">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6">
-            <h2
-              className="text-3xl font-extrabold text-gray-900 text-center mb-12"
-              style={{ fontFamily: "var(--font-outfit, sans-serif)" }}
-            >
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-4">
-              {pricingFaqs.map((faq) => (
-                <div
-                  key={faq.q}
-                  className="bg-white rounded-2xl border border-gray-100 p-6 hover:border-gray-200 transition-colors"
-                >
-                  <h3 className="text-base font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SiteFaqSection
+          categories={faqCategories}
+          subtitle="Pricing and plan details match what you see above — updated for your region."
+          defaultOpenId="starter-free"
+        />
 
         {/* Bottom CTA */}
         <section className="py-16 bg-white text-center">

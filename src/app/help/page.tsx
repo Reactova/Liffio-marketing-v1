@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { FAQAccordion } from "@/components/faq/FAQAccordion";
+import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import { siteConfig } from "@/config/site.config";
-import { homeFaqCategories } from "@/config/faq.config";
+import { getFaqCategories } from "@/config/faq.config";
+import { getPricingContext } from "@/lib/pricing-region.server";
 
 export const metadata: Metadata = {
   title: "Help Center — Liffio",
   description: "Find answers to common questions about Liffio and get support from our team.",
 };
 
-export default function HelpPage() {
+export default async function HelpPage() {
+  const { region } = await getPricingContext();
+  const faqCategories = getFaqCategories(region);
+
   return (
     <>
       <Navbar />
@@ -53,18 +57,11 @@ export default function HelpPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-20 bg-white">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6">
-            <h2
-              className="text-3xl font-extrabold text-gray-900 text-center mb-12"
-              style={{ fontFamily: "var(--font-outfit, sans-serif)" }}
-            >
-              Frequently Asked Questions
-            </h2>
-            <FAQAccordion categories={homeFaqCategories} allowMultiple />
-          </div>
-        </section>
+        <SiteFaqSection
+          categories={faqCategories}
+          variant="plain"
+          subtitle="Answers reflect pricing for your region, including Free, Starter, Business, and Agency."
+        />
 
         {/* Contact form */}
         <section className="py-20 bg-gray-50">

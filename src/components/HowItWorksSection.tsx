@@ -24,7 +24,7 @@ const steps = [
     border: "rgba(168,85,247,0.18)",
     title: "Create Your Free Account",
     detail:
-      "Get started in under 60 seconds — no credit card, no complicated onboarding. Your Liffio account is provisioned instantly.",
+      "Get started in under 60 seconds. No credit card required and no complicated onboarding. Your Liffio account is provisioned instantly.",
     note: "Takes less than 60 seconds",
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth="1.6" stroke="currentColor">

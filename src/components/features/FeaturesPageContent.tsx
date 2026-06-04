@@ -282,7 +282,7 @@ export default function FeaturesPageContent() {
           >
             Ready to automate every touchpoint?
           </h2>
-          <p className="mt-3 text-gray-600">Connect Instagram and go live in minutes. No credit card on Starter.</p>
+          <p className="mt-3 text-gray-600">Connect Instagram and go live in minutes. No credit card required.</p>
           <a href={siteConfig.urls.appSignup} className="btn-primary mt-6 inline-flex items-center gap-2">
             Get Started Free
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" aria-hidden>

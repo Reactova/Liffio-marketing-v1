@@ -1,10 +1,14 @@
 import AppLink from "@/components/AppLink";
 import { FAQAccordion } from "@/components/faq/FAQAccordion";
 import { TechBadge } from "@/components/TechBadge";
-import { homeFaqCategories } from "@/config/faq.config";
+import type { FaqCategory } from "@/config/faq.config";
 import { siteConfig } from "@/config/site.config";
 
-export default function FAQSection() {
+type FAQSectionProps = {
+  categories: FaqCategory[];
+};
+
+export default function FAQSection({ categories }: FAQSectionProps) {
   return (
     <section
       id="faq"
@@ -45,7 +49,7 @@ export default function FAQSection() {
             </div>
 
             <div className="p-5 sm:p-6 lg:p-8">
-              <FAQAccordion categories={homeFaqCategories} defaultOpenId="connect-instagram" />
+              <FAQAccordion categories={categories} defaultOpenId="connect-instagram" />
             </div>
           </div>
         </div>

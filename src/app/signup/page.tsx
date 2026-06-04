@@ -3,8 +3,12 @@ import AppLink from "@/components/AppLink";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SignupForm from "@/components/SignupForm";
+import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import { TechBadge } from "@/components/TechBadge";
 import { MetaVerifiedOnly } from "@/components/MetaVerifiedOnly";
+import { getFaqCategories } from "@/config/faq.config";
+import { getBusinessPlanValueLabel } from "@/config/pricing.config";
+import { getPricingContext } from "@/lib/pricing-region.server";
 import { getSignupTrustRow, metaCopy } from "@/config/meta-copy";
 
 export const metadata: Metadata = {
@@ -71,7 +75,11 @@ function Check() {
   );
 }
 
-export default function SignupPage() {
+export default async function SignupPage() {
+  const { region } = await getPricingContext();
+  const faqCategories = getFaqCategories(region);
+  const businessPlanValue = getBusinessPlanValueLabel(region);
+
   return (
     <>
       <Navbar />
@@ -275,7 +283,7 @@ export default function SignupPage() {
               Content creator with 5K+ followers?
             </h2>
             <p className="text-gray-500 mb-6 max-w-xl mx-auto leading-relaxed">
-              Apply to the Liffio Creators Program and get our full Business plan ($79/month) for
+              Apply to the Liffio Creators Program and get our full Business plan ({businessPlanValue} value) for
               completely free — in exchange for active usage.
             </p>
             <AppLink
@@ -293,6 +301,8 @@ export default function SignupPage() {
             </p>
           </div>
         </section>
+
+        <SiteFaqSection categories={faqCategories} defaultOpenId="starter-free" />
       </main>
 
       <Footer />
