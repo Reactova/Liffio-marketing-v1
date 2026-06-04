@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import { siteConfig } from "@/config/site.config";
+import { pageSeo } from "@/config/seo.config";
 import { getFaqCategories } from "@/config/faq.config";
+import { FaqPageJsonLd } from "@/lib/seo/json-ld";
 import { getPricingContext } from "@/lib/pricing-region.server";
 
-export const metadata: Metadata = {
-  title: "Help Center — Liffio",
-  description: "Find answers to common questions about Liffio and get support from our team.",
-};
+export const metadata = pageSeo.help;
 
 export default async function HelpPage() {
   const { region } = await getPricingContext();
@@ -17,6 +15,7 @@ export default async function HelpPage() {
 
   return (
     <>
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         {/* Header */}

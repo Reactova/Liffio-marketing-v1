@@ -30,7 +30,7 @@ const VALUE_PROPS = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
       </svg>
     ),
-    text: "Rapid fast replies",
+    text: "Auto DM in 10-60s",
   },
   {
     icon: (
@@ -46,7 +46,7 @@ const VALUE_PROPS = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
     ),
-    text: "Comment → DM flows",
+    text: "Comment-to-DM flows",
   },
 ];
 
@@ -92,16 +92,18 @@ export default function HeroSection() {
               className="hero-stagger hero-stagger-2 font-extrabold leading-[1.05] tracking-tight text-[#0a0a0a]"
               style={{ fontFamily: "var(--font-outfit,sans-serif)", fontSize: "clamp(2.75rem,5.5vw,4.75rem)" }}
             >
-              Turn Instagram
+              The Best{" "}
+              <span className="gradient-text">Auto DM Tool</span>
               <br />
-              Comments Into{" "}
-              <span className="gradient-text">Automated DMs</span>
+              for Instagram
             </h1>
 
             <p className="hero-stagger hero-stagger-3 mt-6 max-w-lg text-base leading-relaxed text-gray-600 sm:text-lg">
-              Liffio sends personalised DMs the moment someone comments, reacts, or messages you — capture leads and
-              grow your audience{" "}
-              <span className="font-semibold text-gray-800">24/7</span> while you sleep.
+              <span className="font-semibold text-gray-800">Auto DMs</span> from comments, stories & messages.
+              Liffio is the <span className="font-semibold text-gray-800">Instagram auto DM</span> software with{" "}
+              <span className="font-semibold text-gray-800">auto comment reply</span>, keyword triggers, and{" "}
+              <span className="font-semibold text-gray-800">DM automation</span> — running{" "}
+              <span className="font-semibold text-gray-800">24/7</span> on autopilot.
             </p>
 
             <ul className="hero-stagger hero-stagger-4 mt-6 flex flex-wrap gap-2">

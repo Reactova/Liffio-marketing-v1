@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import SeoDiscoverabilitySection from "@/components/seo/SeoDiscoverabilitySection";
+import { rootSeo } from "@/config/seo.config";
+import { FaqPageJsonLd, SoftwareApplicationJsonLd } from "@/lib/seo/json-ld";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import FeaturesSection from "@/components/FeaturesSection";
@@ -16,6 +20,8 @@ import {
   buildPlansOfferedFaqAnswer,
 } from "@/lib/marketing-plans.server";
 
+export const metadata: Metadata = rootSeo;
+
 export default async function Home() {
   const { region, countryCode } = await getPricingContext();
   const { plans, businessPlanValue } = await fetchMarketingPlansContext(region);
@@ -27,6 +33,8 @@ export default async function Home() {
 
   return (
     <>
+      <SoftwareApplicationJsonLd />
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         <HeroSection />
@@ -35,6 +43,7 @@ export default async function Home() {
         <HowItWorksSection />
         <TestimonialsSection />
         <PricingSection plans={plans} region={region} countryCode={countryCode} />
+        <SeoDiscoverabilitySection />
         <FAQSection categories={faqCategories} />
       </main>
       <Footer />

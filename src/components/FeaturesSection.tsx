@@ -727,23 +727,23 @@ export default function FeaturesSection() {
         {/* Header — inline split: title + copy left, chips right */}
         <div className="mb-8 flex flex-col gap-6 sm:mb-10 lg:mb-16 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
           <div className="max-w-xl">
-            <TechBadge label="Features" variant="section" className="mb-4 sm:mb-5" />
+            <TechBadge label="Auto DM Features" variant="section" className="mb-4 sm:mb-5" />
             <h2
               className="text-3xl font-extrabold leading-tight text-[#0a0a0a] sm:text-4xl sm:text-[2.75rem]"
               style={{ fontFamily: "var(--font-outfit,sans-serif)" }}
             >
-              8 Powerful Automations.{" "}
+              8 Auto DM Automations.{" "}
               <span className="gradient-text">One Dashboard.</span>
             </h2>
             <p className="mt-3 text-base leading-relaxed text-gray-500 sm:text-lg">
-              From comments to live streams — Liffio handles every Instagram interaction automatically.
+              Auto DMs from comments, stories, live streams & inbox — Liffio is your complete Instagram auto DM tool.
             </p>
           </div>
           <div className="flex flex-wrap gap-2 lg:max-w-sm lg:justify-end">
             {[
-              { label: "8 automation types", color: "#a855f7" },
-              { label: "10–60s custom delay", color: "#7c5af3" },
-              { label: "24/7 autopilot", color: "#4259f0" },
+              { label: "Auto DM + Auto Comment", color: "#a855f7" },
+              { label: "10–60s human-like delay", color: "#7c5af3" },
+              { label: "Unlimited auto DMs", color: "#4259f0" },
             ].map((chip) => (
               <TechBadge key={chip.label} label={chip.label} variant="chip" accent={chip.color} />
             ))}

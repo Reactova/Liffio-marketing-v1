@@ -22,10 +22,10 @@ const steps = [
     color: "#a855f7",
     bg: "rgba(168,85,247,0.07)",
     border: "rgba(168,85,247,0.18)",
-    title: "Create Your Free Account",
+    title: "Create Your Free Auto DM Account",
     detail:
-      "Get started in under 60 seconds. No credit card required and no complicated onboarding. Your Liffio account is provisioned instantly.",
-    note: "Takes less than 60 seconds",
+      "Get started with Liffio's auto DM tool in under 60 seconds. No credit card required — start sending auto DMs for free today.",
+    note: "Free auto DM tool signup",
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth="1.6" stroke="currentColor">
         <path
@@ -42,7 +42,7 @@ const steps = [
     color: "#7c5af3",
     bg: "rgba(124,90,243,0.07)",
     border: "rgba(124,90,243,0.18)",
-    title: "Connect Your Instagram",
+    title: "Connect Instagram for Auto DM",
     detail: metaCopy.connectStepDetail,
     note: metaCopy.connectStepNote,
     icon: (
@@ -61,10 +61,10 @@ const steps = [
     color: "#4259f0",
     bg: "rgba(66,89,240,0.07)",
     border: "rgba(66,89,240,0.18)",
-    title: "Launch & Watch It Work",
+    title: "Launch Your Auto DMs",
     detail:
-      "Set your keyword triggers, choose your automation type, write your DM template, and go live. Liffio handles the rest — 24 hours a day, 7 days a week. Most users send their first automated DM within 5 minutes.",
-    note: "First DM sent in under 5 minutes",
+      "Set your keyword triggers, choose your auto DM type (comment, story, or DM reply), write your template, and go live. Liffio's DM automation handles the rest — 24/7. Most users send their first auto DM within 5 minutes.",
+    note: "First auto DM in under 5 minutes",
     icon: (
       <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" strokeWidth="1.6" stroke="currentColor">
         <path

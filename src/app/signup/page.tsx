@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import AppLink from "@/components/AppLink";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,12 +14,10 @@ import {
   buildPlansOfferedFaqAnswer,
 } from "@/lib/marketing-plans.server";
 import { getSignupTrustRow, metaCopy } from "@/config/meta-copy";
+import { pageSeo } from "@/config/seo.config";
+import { FaqPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Get Started Free — Liffio",
-  description:
-    "Sign up for Liffio and automate your Instagram DMs for free. No credit card required. Auto-reply to every comment, story, and DM.",
-};
+export const metadata = pageSeo.signup;
 
 const WHY_PILLS = [
   { icon: "⚡", text: "Rapid fast replies" },
@@ -91,6 +88,7 @@ export default async function SignupPage() {
 
   return (
     <>
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         {/* ── Hero: 2-col split ──────────────────────────────────── */}

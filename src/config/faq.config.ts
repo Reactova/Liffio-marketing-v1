@@ -66,9 +66,77 @@ function plansCategory(region: PricingRegion, overrides?: MarketingFaqOverrides)
   };
 }
 
+const seoDiscoveryCategory: FaqCategory = {
+  id: "auto-dm-tools",
+  label: "Auto DM tools",
+  items: [
+    {
+      id: "what-is-auto-dm-tool",
+      question: "What is an auto DM tool?",
+      answer:
+        "An auto DM tool (also called auto DM software or DM automation tool) sends Instagram direct messages automatically when a trigger fires — for example a keyword in a comment, a story reply, or an inbound DM. Liffio is an auto DM tool that lets you set delays (10–60 seconds), personalize messages, and run comment-to-DM flows without manual inbox work.",
+    },
+    {
+      id: "what-are-auto-dms",
+      question: "What are auto DMs and how do they work?",
+      answer:
+        "Auto DMs are automated direct messages sent by an auto DM tool when someone triggers a specific action — like commenting a keyword on your post, replying to your story, or sending you a DM. With Liffio's auto DMs, you set up the trigger once, and the tool sends your pre-written message automatically 24/7.",
+    },
+    {
+      id: "auto-comment-tool",
+      question: "What is an auto comment tool for Instagram?",
+      answer:
+        "An auto comment tool (or auto comment reply tool) replies publicly under your Instagram post and can send a matching private DM. Liffio combines auto comment reply with comment-to-DM automation so one keyword trigger handles both the public reply and the automated DM — the signature workflow of tools like ManyChat.",
+    },
+    {
+      id: "best-auto-dm-tool",
+      question: "What is the best auto DM tool for Instagram?",
+      answer:
+        "The best auto DM tool depends on your needs. Liffio is ideal for creators and brands who want unlimited auto DMs, simple pricing, and a free tier. We offer the same comment-to-DM, auto comment reply, and story automation features as ManyChat, SendDM, and SuperProfile — without per-message limits.",
+    },
+    {
+      id: "free-auto-dm-tool",
+      question: "Is there a free auto DM tool for Instagram?",
+      answer:
+        "Yes! Liffio offers a free auto DM tool tier that lets you get started with Instagram DM automation without a credit card. The free plan includes comment-to-DM automation, auto comment reply, and basic analytics — enough to test if auto DMs work for your business.",
+    },
+    {
+      id: "manychat-senddm-linkdm",
+      question: "How does Liffio compare to ManyChat, SendDM, or LinkDM?",
+      answer:
+        "Like ManyChat, SendDM, LinkDM, and SuperProfile, Liffio supports keyword triggers, comment-to-DM, auto comment reply, story reply automation, and multi-step DM flows for Instagram. Liffio focuses on Instagram DM automation with unlimited auto DMs on every plan, simple pricing, and a generous free tier — making it a top ManyChat alternative.",
+    },
+    {
+      id: "dm-automation-tool",
+      question: "Is Liffio a DM automation tool or a dming tool?",
+      answer:
+        "Both terms describe the same workflow: automating Instagram DMs at scale. Liffio is a DM automation tool (also called a dming tool, auto DM software, or Instagram auto DM tool) for creators, coaches, and brands who want auto DMs from comments, stories, live chat, and the inbox.",
+    },
+    {
+      id: "comment-to-dm",
+      question: "How does comment-to-DM automation work?",
+      answer:
+        'Comment-to-DM is the core feature of any auto DM tool. You choose keywords (for example "LINK" or "GUIDE"). When someone comments that word on a post or Reel, Liffio sends your auto DM after your chosen delay and can post a public auto comment reply under their comment — the same pattern used by ManyChat, SendDM, and other Instagram auto DM tools.',
+    },
+    {
+      id: "instagram-auto-reply",
+      question: "What is Instagram auto reply?",
+      answer:
+        "Instagram auto reply refers to any automated response sent when someone interacts with your account — via comments, stories, DMs, or live streams. Liffio's auto reply features include auto DMs from comments, story reply automation, DM auto responders, and live comment triggers. All powered by the same auto DM tool technology.",
+    },
+    {
+      id: "auto-dm-safe",
+      question: "Are auto DM tools safe for my Instagram account?",
+      answer:
+        "Yes, when you use a compliant auto DM tool like Liffio. We use official Instagram APIs, human-like delays (10-60 seconds), and rate limiting to keep your account safe. Unlike unofficial bots, Liffio's auto DMs don't risk account suspension.",
+    },
+  ],
+};
+
 /** Region-aware FAQ used across the marketing site */
 export function getFaqCategories(region: PricingRegion, overrides?: MarketingFaqOverrides): FaqCategory[] {
   return [
+    seoDiscoveryCategory,
     {
       id: "getting-started",
       label: "Getting started",

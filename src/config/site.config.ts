@@ -1,5 +1,11 @@
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://liffio.com";
+
+/** Canonical marketing site origin (no trailing slash). */
+export const SITE_URL = rawSiteUrl.endsWith("/") ? rawSiteUrl.slice(0, -1) : rawSiteUrl;
+
 export const siteConfig = {
   urls: {
+    site: SITE_URL,
     appBase: "https://app.liffio.com",
     appSignup: "https://app.liffio.com/register",
     appLogin: "https://app.liffio.com/login",
@@ -8,9 +14,9 @@ export const siteConfig = {
 
   brand: {
     name: "Liffio",
-    tagline: "Instagram DMs, fully automated",
+    tagline: "The best auto DM tool for Instagram",
     description:
-      "Turn every comment into a conversion. Liffio sends intelligent, human-like DMs when someone engages — with a custom 10–60s delay so replies feel natural.",
+      "Liffio is an Instagram auto DM tool for creators and brands. Auto DMs from comments, stories, and messages — with auto comment reply, keyword triggers, and DM automation running 24/7.",
     logoLight: "/logo/light.png",
     logoDark: "/logo/colored.png",
     defaultLogo: "/logo/light.png",
@@ -60,10 +66,12 @@ export const siteConfig = {
   ] as const,
 
   meta: {
-    title: "Liffio — Instagram DM Automation",
-    description: "Automate Instagram DMs and capture more leads.",
-    ogTitle: "Liffio — Instagram DM Automation",
-    ogDescription: "Turn comments into conversations automatically.",
+    title: "Liffio — Auto DM Tool for Instagram",
+    description:
+      "Instagram auto DM tool with auto comment reply, comment-to-DM automation, and keyword triggers.",
+    ogTitle: "Liffio — Instagram Auto DM & Comment Automation",
+    ogDescription:
+      "Automate Instagram DMs from comments, stories, and messages — auto DM tool for creators and brands.",
   },
 } as const;
 

@@ -3,10 +3,10 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 
 const stats = [
-  { id: "dms", value: 100, suffix: "K+", label: "DMs automated" },
-  { id: "creators", value: 2, suffix: "K+", label: "Active creators" },
-  { id: "delivery", value: 98, suffix: "%", label: "Delivery rate" },
-  { id: "uptime", value: 99, suffix: ".9%", label: "Platform uptime" },
+  { id: "dms", value: 100, suffix: "K+", label: "Auto DMs sent" },
+  { id: "creators", value: 2, suffix: "K+", label: "Creators using auto DM" },
+  { id: "delivery", value: 98, suffix: "%", label: "DM delivery rate" },
+  { id: "uptime", value: 99, suffix: ".9%", label: "Auto DM uptime" },
 ] as const;
 
 function useCountUp(target: number, duration = 1500, start = false) {

@@ -1,14 +1,12 @@
-import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
+import { pageSeo } from "@/config/seo.config";
 import { getFaqCategories } from "@/config/faq.config";
+import { FaqPageJsonLd } from "@/lib/seo/json-ld";
 import { getPricingContext } from "@/lib/pricing-region.server";
 
-export const metadata: Metadata = {
-  title: "Blog — Liffio",
-  description: "Tips, guides, and insights on Instagram DM automation, growth strategies, and engagement.",
-};
+export const metadata = pageSeo.blog;
 
 const articles = [
   {
@@ -81,6 +79,7 @@ export default async function BlogPage() {
 
   return (
     <>
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         {/* Header */}

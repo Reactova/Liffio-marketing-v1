@@ -3,7 +3,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CreatorsProgramContent from "@/components/CreatorsProgramContent";
 import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
+import { pageSeo } from "@/config/seo.config";
 import { getFaqCategories } from "@/config/faq.config";
+import { FaqPageJsonLd } from "@/lib/seo/json-ld";
 import { getPricingContext } from "@/lib/pricing-region.server";
 import {
   fetchMarketingPlansContext,
@@ -15,9 +17,12 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const { region } = await getPricingContext();
   const { businessPlanValue: value } = await fetchMarketingPlansContext(region);
+  const description = `Apply to the Liffio Creators Program and get our full Business plan (${value} value) at no cost — Instagram auto DM tool access for creators with 5K+ followers.`;
   return {
-    title: "Creators Program — Liffio",
-    description: `Apply to the Liffio Creators Program and get our full Business plan (${value} value) at no cost. For Instagram creators with 5K+ followers who drive comment engagement.`,
+    ...pageSeo.creatorsProgram,
+    description,
+    openGraph: { ...pageSeo.creatorsProgram.openGraph, description },
+    twitter: { ...pageSeo.creatorsProgram.twitter, description },
   };
 }
 
@@ -32,6 +37,7 @@ export default async function CreatorsProgramPage() {
 
   return (
     <>
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         <CreatorsProgramContent businessPlanValue={businessValue} />

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import AppLink from "@/components/AppLink";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,12 +16,10 @@ import {
 } from "@/lib/marketing-plans.server";
 import { siteConfig } from "@/config/site.config";
 import { metaCopy } from "@/config/meta-copy";
+import { pageSeo } from "@/config/seo.config";
+import { FaqPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Pricing — Liffio",
-  description:
-    "Simple, transparent pricing for Instagram DM automation. Free, Starter, Business, and Agency plans. No hidden fees — scale as you grow.",
-};
+export const metadata = pageSeo.pricing;
 
 export default async function PricingPage() {
   const { region, countryCode } = await getPricingContext();
@@ -36,6 +33,7 @@ export default async function PricingPage() {
 
   return (
     <>
+      <FaqPageJsonLd categories={faqCategories} />
       <Navbar />
       <main id="main-content" className="flex-1">
         {/* Header */}
