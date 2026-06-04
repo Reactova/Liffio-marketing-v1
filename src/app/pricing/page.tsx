@@ -6,12 +6,15 @@ import PricingPlansGrid, { PricingBottomCta } from "@/components/PricingPlansGri
 import PricingComparisonSection from "@/components/pricing/PricingComparisonSection";
 import { CountryFlag } from "@/components/pricing/CountryFlag";
 import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
-import {
-  getPricingPlans,
-} from "@/config/pricing.config";
 import { getFaqCategories } from "@/config/faq.config";
 import { getPricingLocationLabel } from "@/lib/pricing-region";
 import { getPricingContext } from "@/lib/pricing-region.server";
+import {
+  fetchMarketingPlansContext,
+  buildCreatorsProgramFaqAnswer,
+  buildFreePlanFaqAnswer,
+  buildPlansOfferedFaqAnswer,
+} from "@/lib/marketing-plans.server";
 import { siteConfig } from "@/config/site.config";
 import { metaCopy } from "@/config/meta-copy";
 
@@ -23,8 +26,12 @@ export const metadata: Metadata = {
 
 export default async function PricingPage() {
   const { region, countryCode } = await getPricingContext();
-  const plans = getPricingPlans(region);
-  const faqCategories = getFaqCategories(region);
+  const { plans, businessPlanValue } = await fetchMarketingPlansContext(region);
+  const faqCategories = getFaqCategories(region, {
+    freePlanFaqAnswer: buildFreePlanFaqAnswer(region, plans),
+    plansOfferedFaqAnswer: buildPlansOfferedFaqAnswer(region, plans),
+    creatorsProgramFaqAnswer: buildCreatorsProgramFaqAnswer(businessPlanValue),
+  });
   const locationLabel = getPricingLocationLabel(region, countryCode);
 
   return (

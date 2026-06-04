@@ -8,13 +8,22 @@ import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import { getFaqCategories } from "@/config/faq.config";
-import { getPricingPlans } from "@/config/pricing.config";
 import { getPricingContext } from "@/lib/pricing-region.server";
+import {
+  fetchMarketingPlansContext,
+  buildCreatorsProgramFaqAnswer,
+  buildFreePlanFaqAnswer,
+  buildPlansOfferedFaqAnswer,
+} from "@/lib/marketing-plans.server";
 
 export default async function Home() {
   const { region, countryCode } = await getPricingContext();
-  const plans = getPricingPlans(region);
-  const faqCategories = getFaqCategories(region);
+  const { plans, businessPlanValue } = await fetchMarketingPlansContext(region);
+  const faqCategories = getFaqCategories(region, {
+    freePlanFaqAnswer: buildFreePlanFaqAnswer(region, plans),
+    plansOfferedFaqAnswer: buildPlansOfferedFaqAnswer(region, plans),
+    creatorsProgramFaqAnswer: buildCreatorsProgramFaqAnswer(businessPlanValue),
+  });
 
   return (
     <>

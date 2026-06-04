@@ -4,12 +4,17 @@ import Footer from "@/components/Footer";
 import CreatorsProgramContent from "@/components/CreatorsProgramContent";
 import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import { getFaqCategories } from "@/config/faq.config";
-import { getBusinessPlanValueLabel } from "@/config/pricing.config";
 import { getPricingContext } from "@/lib/pricing-region.server";
+import {
+  fetchMarketingPlansContext,
+  buildCreatorsProgramFaqAnswer,
+  buildFreePlanFaqAnswer,
+  buildPlansOfferedFaqAnswer,
+} from "@/lib/marketing-plans.server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { region } = await getPricingContext();
-  const value = getBusinessPlanValueLabel(region);
+  const { businessPlanValue: value } = await fetchMarketingPlansContext(region);
   return {
     title: "Creators Program — Liffio",
     description: `Apply to the Liffio Creators Program and get our full Business plan (${value} value) at no cost. For Instagram creators with 5K+ followers who drive comment engagement.`,
@@ -18,8 +23,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function CreatorsProgramPage() {
   const { region } = await getPricingContext();
-  const faqCategories = getFaqCategories(region);
-  const businessValue = getBusinessPlanValueLabel(region);
+  const { plans, businessPlanValue: businessValue } = await fetchMarketingPlansContext(region);
+  const faqCategories = getFaqCategories(region, {
+    freePlanFaqAnswer: buildFreePlanFaqAnswer(region, plans),
+    plansOfferedFaqAnswer: buildPlansOfferedFaqAnswer(region, plans),
+    creatorsProgramFaqAnswer: buildCreatorsProgramFaqAnswer(businessValue),
+  });
 
   return (
     <>

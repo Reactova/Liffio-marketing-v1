@@ -18,7 +18,13 @@ export type FaqCategory = {
   items: FaqItem[];
 };
 
-function plansCategory(region: PricingRegion): FaqCategory {
+export type MarketingFaqOverrides = {
+  freePlanFaqAnswer?: string;
+  plansOfferedFaqAnswer?: string;
+  creatorsProgramFaqAnswer?: string;
+};
+
+function plansCategory(region: PricingRegion, overrides?: MarketingFaqOverrides): FaqCategory {
   return {
     id: "plans",
     label: "Plans & billing",
@@ -26,12 +32,12 @@ function plansCategory(region: PricingRegion): FaqCategory {
       {
         id: "starter-free",
         question: "Is the Free plan really free?",
-        answer: getFreePlanFaqAnswer(region),
+        answer: overrides?.freePlanFaqAnswer ?? getFreePlanFaqAnswer(region),
       },
       {
         id: "plans-offered",
         question: "What plans does Liffio offer?",
-        answer: getPlansOfferedFaqAnswer(region),
+        answer: overrides?.plansOfferedFaqAnswer ?? getPlansOfferedFaqAnswer(region),
       },
       {
         id: "billing-cycle",
@@ -54,14 +60,14 @@ function plansCategory(region: PricingRegion): FaqCategory {
       {
         id: "creators-program",
         question: "Do you offer a Creators Program?",
-        answer: getCreatorsProgramFaqAnswer(region),
+        answer: overrides?.creatorsProgramFaqAnswer ?? getCreatorsProgramFaqAnswer(region),
       },
     ],
   };
 }
 
 /** Region-aware FAQ used across the marketing site */
-export function getFaqCategories(region: PricingRegion): FaqCategory[] {
+export function getFaqCategories(region: PricingRegion, overrides?: MarketingFaqOverrides): FaqCategory[] {
   return [
     {
       id: "getting-started",
@@ -110,7 +116,7 @@ export function getFaqCategories(region: PricingRegion): FaqCategory[] {
         },
       ],
     },
-    plansCategory(region),
+    plansCategory(region, overrides),
     {
       id: "safety",
       label: "Safety & compliance",

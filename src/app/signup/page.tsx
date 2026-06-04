@@ -7,8 +7,13 @@ import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
 import { TechBadge } from "@/components/TechBadge";
 import { MetaVerifiedOnly } from "@/components/MetaVerifiedOnly";
 import { getFaqCategories } from "@/config/faq.config";
-import { getBusinessPlanValueLabel } from "@/config/pricing.config";
 import { getPricingContext } from "@/lib/pricing-region.server";
+import {
+  fetchMarketingPlansContext,
+  buildCreatorsProgramFaqAnswer,
+  buildFreePlanFaqAnswer,
+  buildPlansOfferedFaqAnswer,
+} from "@/lib/marketing-plans.server";
 import { getSignupTrustRow, metaCopy } from "@/config/meta-copy";
 
 export const metadata: Metadata = {
@@ -77,8 +82,12 @@ function Check() {
 
 export default async function SignupPage() {
   const { region } = await getPricingContext();
-  const faqCategories = getFaqCategories(region);
-  const businessPlanValue = getBusinessPlanValueLabel(region);
+  const { plans, businessPlanValue } = await fetchMarketingPlansContext(region);
+  const faqCategories = getFaqCategories(region, {
+    freePlanFaqAnswer: buildFreePlanFaqAnswer(region, plans),
+    plansOfferedFaqAnswer: buildPlansOfferedFaqAnswer(region, plans),
+    creatorsProgramFaqAnswer: buildCreatorsProgramFaqAnswer(businessPlanValue),
+  });
 
   return (
     <>
