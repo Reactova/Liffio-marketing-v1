@@ -20,7 +20,7 @@ export default function FAQSection({ categories }: FAQSectionProps) {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="card-base overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(260px,300px)_1fr]">
             <div className="border-b border-brand-100/80 bg-gradient-to-br from-brand-50/40 to-white p-6 sm:p-8 lg:border-b-0 lg:border-r">

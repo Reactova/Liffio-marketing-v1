@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
+import { getFaqCategories } from "@/config/faq.config";
+import { getPricingContext } from "@/lib/pricing-region.server";
 
 export const metadata: Metadata = {
   title: "Blog — Liffio",
@@ -72,7 +75,10 @@ const articles = [
 
 const categories = ["All", "Automation", "Growth", "Strategy", "Tutorial", "Case Study", "Tips"];
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const { region } = await getPricingContext();
+  const faqCategories = getFaqCategories(region);
+
   return (
     <>
       <Navbar />
@@ -167,6 +173,8 @@ export default function BlogPage() {
             </div>
           </div>
         </section>
+
+        <SiteFaqSection categories={faqCategories} />
       </main>
       <Footer />
     </>

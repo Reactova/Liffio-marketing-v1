@@ -1,5 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SiteFaqSection } from "@/components/faq/SiteFaqSection";
+import { getFaqCategories } from "@/config/faq.config";
+import { getPricingContext } from "@/lib/pricing-region.server";
 
 type LegalPageProps = {
   title: string;
@@ -12,7 +15,9 @@ function isSectionHeading(paragraph: string): boolean {
   return /^\d+(\.\d+)?\.\s/.test(trimmed) || (/^[A-Z]/.test(trimmed) && trimmed.length < 72 && !trimmed.endsWith("."));
 }
 
-export default function LegalPage({ title, lastUpdated, content }: LegalPageProps) {
+export default async function LegalPage({ title, lastUpdated, content }: LegalPageProps) {
+  const { region } = await getPricingContext();
+  const faqCategories = getFaqCategories(region);
   const paragraphs = content.split("\n").filter((p) => p.trim() !== "");
 
   return (
@@ -23,7 +28,7 @@ export default function LegalPage({ title, lastUpdated, content }: LegalPageProp
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
             <h1
               className="text-3xl font-extrabold text-[#0a0a0a] sm:text-4xl"
-              style={{ fontFamily: "var(--font-outfit,sans-serif)" }}
+              style={{ fontFamily: "var(--font-outfit, sans-serif)" }}
             >
               {title}
             </h1>
@@ -42,7 +47,7 @@ export default function LegalPage({ title, lastUpdated, content }: LegalPageProp
                     <h2
                       key={i}
                       className="!mt-8 text-base font-bold text-[#0a0a0a] first:!mt-0 sm:text-lg"
-                      style={{ fontFamily: "var(--font-outfit,sans-serif)" }}
+                      style={{ fontFamily: "var(--font-outfit, sans-serif)" }}
                     >
                       {p}
                     </h2>
@@ -54,6 +59,8 @@ export default function LegalPage({ title, lastUpdated, content }: LegalPageProp
             </div>
           </div>
         </section>
+
+        <SiteFaqSection categories={faqCategories} variant="plain" />
       </main>
       <Footer />
     </>
